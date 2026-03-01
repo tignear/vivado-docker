@@ -67,11 +67,8 @@ RUN --mount=type=bind,target=/mnt/build \
     && echo "=== Cleaning up ===" \
     && rm -rf /tmp/xilinx_unified
 
-# Source Vivado/Vitis settings on every shell
-RUN echo 'for f in /opt/Xilinx/Vivado/2025.2/settings64.sh \
-               /opt/Xilinx/Vitis/2025.2/settings64.sh; do \
-      [ -f "$f" ] && . "$f"; \
-    done' >> /etc/bash.bashrc
+# Source Vivado/Vitis settings on every login shell
+RUN printf '[ -f /opt/Xilinx/2025.2/Vivado/settings64.sh ] && . /opt/Xilinx/2025.2/Vivado/settings64.sh\n[ -f /opt/Xilinx/2025.2/Vitis/settings64.sh ] && . /opt/Xilinx/2025.2/Vitis/settings64.sh\n' > /etc/profile.d/vivado.sh
 
 WORKDIR /workspace
 CMD ["/bin/bash", "-l"]
