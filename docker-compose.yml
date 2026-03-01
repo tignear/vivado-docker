@@ -1,0 +1,17 @@
+services:
+  vivado:
+    build:
+      context: .
+      secrets:
+        - auth_token
+    image: vivado:2025.2
+    env_file:
+      - .env
+    volumes:
+      - ./workspace:/workspace
+    stdin_open: true
+    tty: true
+
+secrets:
+  auth_token:
+    file: ./auth_token

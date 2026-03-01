@@ -1,0 +1,9 @@
+*.bin
+*.deb
+.env
+auth_token
+workspace/
+*:Zone.Identifier
+.tmp-*
+.env.build
+.claude/
