@@ -45,6 +45,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 ENV LANG=en_US.UTF-8
 ENV LC_ALL=en_US.UTF-8
 
+# Workaround: Vivado's libtbbmalloc_proxy conflicts with libudev in containers
+# https://adaptivesupport.amd.com/s/article/000034450
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libudev.so.1
+
 # Install Vivado/Vitis in batch mode.
 # - bind mount: installer .bin stays out of image layers
 # - secret mount: auth token never appears in build logs or layers
